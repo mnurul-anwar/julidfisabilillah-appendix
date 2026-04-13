@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lampiran Online — #JulidFiSabilillah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --ink: #1a1714;
+  --ink-2: #4a4743;
+  --ink-3: #888580;
+  --paper: #faf9f7;
+  --paper-2: #f0ede8;
+  --paper-3: #e5e0d8;
+  --accent: #c9430a;
+  --accent-2: #e8693a;
+  --teal: #0f6e56;
+  --teal-light: #e1f5ee;
+  --amber: #ba7517;
+  --amber-light: #faeeda;
+  --blue: #185fa5;
+  --blue-light: #e6f1fb;
+  --border: rgba(26,23,20,0.10);
+  --radius: 10px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(250,249,247,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.nav-brand {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 6rem 2rem 4rem;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.5;
+}
+.hero-content { max-width: 860px; margin: 0 auto; position: relative; }
+.hero-tag {
+  display: inline-block;
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(201,67,10,0.08);
+  border: 1px solid rgba(201,67,10,0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.hero-title em { color: var(--accent); font-style: italic; }
+.hero-meta {
+  font-size: 0.9rem; color: var(--ink-2);
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+}
+.hero-meta strong { color: var(--ink); font-weight: 500; }
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 3rem;
+}
+.stat-box {
+  background: var(--paper);
+  padding: 1.25rem 1.5rem;
+}
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.stat-lbl {
+  font-size: 0.78rem;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── SECTIONS ── */
+section { padding: 5rem 2rem; }
+section:nth-child(even) { background: var(--paper-2); }
+.section-inner { max-width: 960px; margin: 0 auto; }
+.section-eyebrow {
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.section-desc {
+  font-size: 0.95rem; color: var(--ink-2);
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+}
+.divider { width: 40px; height: 2px; background: var(--accent); margin-bottom: 2rem; }
+
+/* ── METODOLOGI ── */
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.method-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+.method-card-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.2rem;
+  color: var(--paper-3);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.method-card h3 {
+  font-size: 0.92rem; font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.method-card p {
+  font-size: 0.85rem; color: var(--ink-2);
+  line-height: 1.65;
+}
+.code-block {
+  background: #1a1714;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+}
+.code-block pre {
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #d4c9b8;
+  line-height: 1.7;
+  white-space: pre;
+}
+.code-comment { color: #6b6356; }
+.code-kw { color: #e8693a; }
+.code-str { color: #8fc98b; }
+.code-num { color: #7ec8e3; }
+.code-fn { color: #c9a96e; }
+
+/* ── CHARTS ── */
+.chart-wrap {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.chart-title {
+  font-size: 0.82rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--ink-3);
+  margin-bottom: 1rem;
+}
+.chart-container { position: relative; width: 100%; }
+
+/* ── PEAK TABLE ── */
+.peak-table-wrap { overflow-x: auto; margin-top: 1.5rem; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+thead th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-3);
+  border-bottom: 2px solid var(--border);
+  background: var(--paper-2);
+}
+tbody td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink-2);
+  vertical-align: top;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--paper-2); }
+.badge {
+  display: inline-block;
+  font-size: 0.72rem; font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+.badge-hot { background: rgba(201,67,10,0.1); color: var(--accent); }
+.badge-warm { background: rgba(186,117,23,0.1); color: var(--amber); }
+.badge-teal { background: var(--teal-light); color: var(--teal); }
+.badge-blue { background: var(--blue-light); color: var(--blue); }
+
+/* ── TIER GRID ── */
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.tier-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+.tier-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.tier-1::before { background: var(--accent); }
+.tier-2::before { background: var(--amber); }
+.tier-3::before { background: var(--teal); }
+.tier-4::before { background: var(--blue); }
+.tier-5::before { background: #888580; }
+.tier-6::before { background: #c4bfb8; }
+.tier-label {
+  font-size: 0.7rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--ink-3);
+  margin-bottom: 0.4rem;
+}
+.tier-range {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.tier-stat { font-size: 0.82rem; color: var(--ink-2); margin-bottom: 0.2rem; }
+.tier-stat strong { color: var(--ink); }
+.tier-role {
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+/* ── FRAMING ── */
+.framing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 2rem;
+}
+@media (max-width: 680px) { .framing-grid { grid-template-columns: 1fr; } }
+.framing-bar-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.framing-bar-item {}
+.framing-bar-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 0.3rem;
+}
+.framing-bar-name { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+.framing-bar-pct { font-size: 0.82rem; color: var(--ink-3); }
+.framing-bar-track {
+  height: 7px;
+  background: var(--paper-3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.framing-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease;
+}
+
+/* ── TWEET CARDS ── */
+.tweet-filter-row {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.filter-btn {
+  font-size: 0.78rem; font-weight: 500;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  background: var(--paper);
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.tweet-grid { display: grid; grid-template-columns: 1fr; gap: 0.875rem; }
+.tweet-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-left: 3px solid;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.25rem 1.5rem;
+  transition: transform 0.15s;
+}
+.tweet-card:hover { transform: translateX(3px); }
+.tweet-card.dim-strukturpeluang { border-left-color: var(--accent); }
+.tweet-card.dim-mobilisasi { border-left-color: var(--teal); }
+.tweet-card.dim-pembingkaian-diagnostik { border-left-color: var(--amber); }
+.tweet-card.dim-pembingkaian-prognostik { border-left-color: var(--blue); }
+.tweet-card.dim-pembingkaian-motivasional { border-left-color: #9b59b6; }
+.tweet-card-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 0.65rem; flex-wrap: wrap; gap: 0.5rem;
+}
+.tweet-date { font-size: 0.78rem; color: var(--ink-3); }
+.tweet-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.tweet-text {
+  font-size: 0.92rem; color: var(--ink);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+.tweet-meta {
+  display: flex; gap: 1.25rem;
+  font-size: 0.78rem; color: var(--ink-3);
+}
+.tweet-meta span strong { color: var(--ink-2); }
+.hidden { display: none !important; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  color: rgba(250,249,247,0.5);
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.82rem;
+}
+footer a { color: rgba(250,249,247,0.7); }
+
+/* ── LEGEND ── */
+.legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
+.legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--ink-3); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.legend-line { width: 18px; height: 3px; border-radius: 2px; flex-shrink: 0; }
+
+/* ── COHORT TABLE ── */
+.cohort-bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.cohort-label { font-size: 0.82rem; color: var(--ink-2); min-width: 90px; }
+.cohort-track { flex: 1; height: 28px; background: var(--paper-3); border-radius: 4px; overflow: hidden; display: flex; }
+.cohort-fill { height: 100%; display: flex; align-items: center; padding-left: 0.6rem; font-size: 0.74rem; font-weight: 500; color: white; transition: width 1s ease; }
+.cohort-val { font-size: 0.8rem; color: var(--ink-3); min-width: 100px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#hero">#JulidFiSabilillah</a>
+  <ul class="nav-links">
+    <li><a href="#metodologi">Metodologi</a></li>
+    <li><a href="#peluang">Str. Peluang</a></li>
+    <li><a href="#mobilisasi">Str. Mobilisasi</a></li>
+    <li><a href="#pembingkaian">Pembingkaian</a></li>
+    <li><a href="#tweet">Tweet</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Lampiran Online · Tesis Magister</div>
+    <h1 class="hero-title">
+      Melampaui <em>Clicktivism</em>:<br>
+      Studi Kasus Aktivisme Media Sosial<br>#JulidFiSabilillah di X
+    </h1>
+    <div class="hero-meta">
+      <strong>Mochamad Nurul Anwar</strong> · NIM 223122021<br>
+      Program Studi Magister Ilmu Komunikasi · Universitas Paramadina · 2026<br>
+      Pembimbing: —<br><br>
+      Lampiran ini menyajikan data, visualisasi, dan dokumentasi metodologi secara terbuka
+      sebagai pelengkap tesis. Dataset mencakup tweet berkaitan gerakan
+      <strong>#JulidFiSabilillah</strong> periode November 2023 – Februari 2024
+      yang telah melalui tahap prapemrosesan.
+    </div>
+    <div class="hero-stats">
+      <div class="stat-box">
+        <div class="stat-num">2.343</div>
+        <div class="stat-lbl">Total tweet</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">1.410</div>
+        <div class="stat-lbl">Pengguna unik</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">120</div>
+        <div class="stat-lbl">Hari observasi</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">6</div>
+        <div class="stat-lbl">Hari puncak (Z ≥ 2,0)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-lbl">Dimensi analisis</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METODOLOGI -->
+<section id="metodologi">
+  <div class="section-inner">
+    <div class="section-eyebrow">Metodologi</div>
+    <h2 class="section-title">Dataset &amp; Pendekatan Analisis</h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      Penelitian ini menggunakan pendekatan <em>mixed methods</em> yang menggabungkan
+      analisis kuantitatif berbasis Python dan analisis kualitatif interpretatif.
+      Berikut ringkasan tiga pendekatan analitis yang digunakan untuk masing-masing dimensi.
+    </p>
+
+    <div class="method-grid">
+      <div class="method-card">
+        <div class="method-card-num">01</div>
+        <h3>Struktur Peluang</h3>
+        <p>Analisis runtun waktu (<em>time series</em>) dengan deteksi puncak berbasis <em>Z-score</em>
+        dan <em>7-day rolling mean</em>. Hari dikategorikan sebagai puncak apabila Z-score ≥ 2,0.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-card-num">02</div>
+        <h3>Struktur Mobilisasi</h3>
+        <p>Pengelompokan partisipan ke dalam enam <em>tier groups</em> berdasarkan frekuensi cuitan,
+        dikombinasikan dengan <em>cohort analysis</em> berdasarkan bulan pertama partisipasi.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-card-num">03</div>
+        <h3>Proses Pembingkaian</h3>
+        <p>Klasifikasi berbasis aturan (<em>rule-based classification</em>) menggunakan <em>codebook</em>
+        operasional tiga kategori utama: <em>diagnostic</em>, <em>prognostic</em>, dan <em>motivational framing</em>.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <pre><span class="code-comment"># ── Struktur Peluang: Z-score & Rolling Mean ──────────────────────────</span>
+<span class="code-kw">import</span> pandas <span class="code-kw">as</span> pd
+<span class="code-kw">import</span> numpy <span class="code-kw">as</span> np
+
+daily = df.groupby(<span class="code-str">'date_only'</span>).size().reset_index(name=<span class="code-str">'tweet_count'</span>)
+
+<span class="code-comment"># Lengkapi tanggal yang kosong dengan 0</span>
+full_range = pd.date_range(daily[<span class="code-str">'date_only'</span>].min(), daily[<span class="code-str">'date_only'</span>].max())
+daily = daily.set_index(<span class="code-str">'date_only'</span>).reindex(full_range, fill_value=<span class="code-num">0</span>).reset_index()
+
+<span class="code-comment"># Rolling mean 7 hari (terpusat)</span>
+daily[<span class="code-str">'rolling_mean'</span>] = daily[<span class="code-str">'tweet_count'</span>].rolling(<span class="code-num">7</span>, center=<span class="code-kw">True</span>, min_periods=<span class="code-num">1</span>).mean()
+
+<span class="code-comment"># Z-score harian</span>
+mu  = daily[<span class="code-str">'tweet_count'</span>].mean()   <span class="code-comment"># μ = 19.52</span>
+sig = daily[<span class="code-str">'tweet_count'</span>].std()    <span class="code-comment"># σ = 25.87</span>
+daily[<span class="code-str">'zscore'</span>] = (daily[<span class="code-str">'tweet_count'</span>] - mu) / sig
+
+<span class="code-comment"># Hari puncak: Z-score ≥ 2.0</span>
+peaks = daily[daily[<span class="code-str">'zscore'</span>] >= <span class="code-num">2.0</span>]
+
+<span class="code-comment"># ── Struktur Mobilisasi: Tier Groups ─────────────────────────────────</span>
+user_counts = df.groupby(<span class="code-str">'username'</span>).size().reset_index(name=<span class="code-str">'tweet_count'</span>)
+
+tier_bins   = [<span class="code-num">0</span>, <span class="code-num">1</span>, <span class="code-num">10</span>, <span class="code-num">25</span>, <span class="code-num">50</span>, <span class="code-num">250</span>, <span class="code-num">500</span>]
+tier_labels = [<span class="code-str">'Tier 6'</span>, <span class="code-str">'Tier 5'</span>, <span class="code-str">'Tier 4'</span>, <span class="code-str">'Tier 3'</span>, <span class="code-str">'Tier 2'</span>, <span class="code-str">'Tier 1'</span>]
+user_counts[<span class="code-str">'tier'</span>] = pd.cut(user_counts[<span class="code-str">'tweet_count'</span>], bins=tier_bins, labels=tier_labels)
+
+<span class="code-comment"># ── Pembingkaian: Rule-based Classification ───────────────────────────</span>
+diagnostic_kw  = [<span class="code-str">'zionis'</span>, <span class="code-str">'israel'</span>, <span class="code-str">'penjajah'</span>, <span class="code-str">'genosida'</span>, <span class="code-str">'zionis pesek'</span>, ...]
+prognostic_kw  = [<span class="code-str">'ayo'</span>, <span class="code-str">'report'</span>, <span class="code-str">'boikot'</span>, <span class="code-str">'rapatkan barisan'</span>, <span class="code-str">'serangan'</span>, ...]
+motivational_kw = [<span class="code-str">'bismillah'</span>, <span class="code-str">'semangat'</span>, <span class="code-str">'fi sabilillah'</span>, <span class="code-str">'insyaallah'</span>, ...]
+
+<span class="code-kw">def</span> <span class="code-fn">classify_frame</span>(text):
+    d = <span class="code-kw">any</span>(kw <span class="code-kw">in</span> text <span class="code-kw">for</span> kw <span class="code-kw">in</span> diagnostic_kw)
+    p = <span class="code-kw">any</span>(kw <span class="code-kw">in</span> text <span class="code-kw">for</span> kw <span class="code-kw">in</span> prognostic_kw)
+    m = <span class="code-kw">any</span>(kw <span class="code-kw">in</span> text <span class="code-kw">for</span> kw <span class="code-kw">in</span> motivational_kw)
+    <span class="code-kw">return</span> {<span class="code-str">'diagnostic'</span>: d, <span class="code-str">'prognostic'</span>: p, <span class="code-str">'motivational'</span>: m}
+
+df[<span class="code-str">'framing'</span>] = df[<span class="code-str">'text_clean'</span>].apply(<span class="code-fn">classify_frame</span>)</pre>
+    </div>
+  </div>
+</section>
+
+<!-- STRUKTUR PELUANG -->
+<section id="peluang">
+  <div class="section-inner">
+    <div class="section-eyebrow">Dimensi 1</div>
+    <h2 class="section-title">Struktur Peluang <span style="font-style:italic;font-size:0.7em;color:var(--ink-3)">(Opportunity Structures)</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      Distribusi aktivitas tweet harian divisualisasikan untuk mengidentifikasi momen-momen
+      ketika partisipasi meningkat signifikan. Hari puncak (<em>peak dates</em>) dideteksi
+      menggunakan Z-score ≥ 2,0 — artinya aktivitas berada setidaknya dua standar deviasi
+      di atas rata-rata periode observasi (μ = 19,52; σ = 25,87).
+    </p>
+
+    <div class="chart-wrap">
+      <div class="chart-title">Tren Aktivitas Tweet Harian — Nov 2023 s.d. Feb 2024</div>
+      <div class="chart-container" style="height:280px">
+        <canvas id="trendChart"></canvas>
+      </div>
+      <div class="legend" style="margin-top:1rem">
+        <div class="legend-item"><div class="legend-dot" style="background:#185fa5;opacity:0.4"></div>Tweet harian</div>
+        <div class="legend-item"><div class="legend-line" style="background:#ba7517"></div>Rolling mean 7 hari</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c9430a"></div>Hari puncak (Z ≥ 2,0)</div>
+      </div>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="chart-title">Distribusi Z-Score Harian</div>
+      <div class="chart-container" style="height:200px">
+        <canvas id="zscoreChart"></canvas>
+      </div>
+    </div>
+
+    <h3 style="font-family:'DM Serif Display',serif;font-size:1.15rem;margin:2rem 0 1rem;color:var(--ink)">Daftar Hari Puncak Aktivitas</h3>
+    <div class="peak-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Total Tweet</th>
+            <th>Z-Score</th>
+            <th>Gelombang</th>
+            <th>Konteks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>19 Nov 2023</strong></td>
+            <td>129</td>
+            <td><span class="badge badge-hot">4,21</span></td>
+            <td><span class="badge badge-hot">Gelombang I</span></td>
+            <td>Ajakan awal oleh Erlangga Greschinov; viralnya narasi efektivitas digital melalui laporan <em>Haaretz</em></td>
+          </tr>
+          <tr>
+            <td><strong>20 Nov 2023</strong></td>
+            <td>151</td>
+            <td><span class="badge badge-hot">5,06</span></td>
+            <td><span class="badge badge-hot">Gelombang I</span></td>
+            <td>Puncak tertinggi; pengangkatan simbolik Erlangga sebagai "Komandan" via format SK viral</td>
+          </tr>
+          <tr>
+            <td><strong>21 Nov 2023</strong></td>
+            <td>142</td>
+            <td><span class="badge badge-hot">4,72</span></td>
+            <td><span class="badge badge-hot">Gelombang I</span></td>
+            <td>Seruan menjadikan #JulidFiSabilillah trending topic dunia; konsolidasi kohesi internal</td>
+          </tr>
+          <tr>
+            <td><strong>24 Nov 2023</strong></td>
+            <td>79</td>
+            <td><span class="badge badge-warm">2,29</span></td>
+            <td><span class="badge badge-hot">Ekor Gel. I</span></td>
+            <td>Momentum residual; penyebaran daftar akun target dan distribusi konten turunan</td>
+          </tr>
+          <tr>
+            <td><strong>12 Feb 2024</strong></td>
+            <td>81</td>
+            <td><span class="badge badge-warm">2,37</span></td>
+            <td><span class="badge badge-teal">Gelombang II</span></td>
+            <td>Serangan Israel ke Rafah; kecaman publik meningkat; tagar #ICJ_Breach</td>
+          </tr>
+          <tr>
+            <td><strong>19 Feb 2024</strong></td>
+            <td>73</td>
+            <td><span class="badge badge-teal">2,06</span></td>
+            <td><span class="badge badge-teal">Gelombang II</span></td>
+            <td>Kontroversi kerja sama pertanian RI–Israel; harapan pasca-Pemilu 2024; sidang ICJ Menlu Retno</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- STRUKTUR MOBILISASI -->
+<section id="mobilisasi">
+  <div class="section-inner">
+    <div class="section-eyebrow">Dimensi 2</div>
+    <h2 class="section-title">Struktur Mobilisasi <span style="font-style:italic;font-size:0.7em;color:var(--ink-3)">(Mobilizing Structures)</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      Analisis tingkat partisipasi dilakukan melalui pengelompokan 1.410 pengguna unik
+      ke dalam enam <em>tier</em> berdasarkan frekuensi cuitan, serta <em>cohort analysis</em>
+      berdasarkan bulan pertama partisipasi.
+    </p>
+
+    <h3 style="font-family:'DM Serif Display',serif;font-size:1.1rem;margin-bottom:1rem;color:var(--ink)">Distribusi Tier Partisipan</h3>
+    <div class="tier-grid">
+      <div class="tier-card tier-1">
+        <div class="tier-label">Tier 1 · Vigilante / Aktor Inti</div>
+        <div class="tier-range">251–500 tweet</div>
+        <div class="tier-stat"><strong>1</strong> pengguna (0,07%)</div>
+        <div class="tier-stat"><strong>253</strong> tweet · <strong>10,8%</strong> dari total</div>
+        <div class="tier-role">@erlanishere — 253 tweet, eng. 1.376.099</div>
+      </div>
+      <div class="tier-card tier-2">
+        <div class="tier-label">Tier 2 · Semi-active / Pendukung Inti</div>
+        <div class="tier-range">101–250 tweet</div>
+        <div class="tier-stat"><strong>1</strong> pengguna (0,07%)</div>
+        <div class="tier-stat"><strong>232</strong> tweet · <strong>9,9%</strong> dari total</div>
+        <div class="tier-role">@fmn99_gaming — shock troops volume tinggi</div>
+      </div>
+      <div class="tier-card tier-3">
+        <div class="tier-label">Tier 3 · Pasukan Aktif</div>
+        <div class="tier-range">26–50 tweet</div>
+        <div class="tier-stat"><strong>2</strong> pengguna (0,14%)</div>
+        <div class="tier-stat"><strong>61</strong> tweet · <strong>2,6%</strong> dari total</div>
+        <div class="tier-role">Kontributor aktif konsisten</div>
+      </div>
+      <div class="tier-card tier-4">
+        <div class="tier-label">Tier 4 · Amplifiers</div>
+        <div class="tier-range">11–25 tweet</div>
+        <div class="tier-stat"><strong>3</strong> pengguna (0,21%)</div>
+        <div class="tier-stat"><strong>37</strong> tweet · <strong>1,58%</strong> dari total</div>
+        <div class="tier-role">Penyebar aktif pesan gerakan</div>
+      </div>
+      <div class="tier-card tier-5">
+        <div class="tier-label">Tier 5 · Crowd Workers</div>
+        <div class="tier-range">2–10 tweet</div>
+        <div class="tier-stat"><strong>220</strong> pengguna (15,6%)</div>
+        <div class="tier-stat"><strong>577</strong> tweet · <strong>24,63%</strong> dari total</div>
+        <div class="tier-role">Infrastruktur distribusi pesan</div>
+      </div>
+      <div class="tier-card tier-6">
+        <div class="tier-label">Tier 6 · Massa Pendukung</div>
+        <div class="tier-range">1 tweet</div>
+        <div class="tier-stat"><strong>1.183</strong> pengguna (83,9%)</div>
+        <div class="tier-stat"><strong>1.183</strong> tweet · <strong>50,49%</strong> dari total</div>
+        <div class="tier-role">Kontribusi mikro kolektif</div>
+      </div>
+    </div>
+
+    <div class="chart-wrap" style="margin-top:2rem">
+      <div class="chart-title">Kontribusi Tweet per Tier (%)</div>
+      <div class="chart-container" style="height:220px">
+        <canvas id="tierChart"></canvas>
+      </div>
+    </div>
+
+    <h3 style="font-family:'DM Serif Display',serif;font-size:1.1rem;margin:2rem 0 1rem;color:var(--ink)">Analisis Kohort</h3>
+    <p style="font-size:0.88rem;color:var(--ink-2);margin-bottom:1.5rem;line-height:1.7">
+      Partisipan dikelompokkan berdasarkan bulan pertama kali muncul dalam dataset.
+      Kohort Januari 2024 mencatat rata-rata tertinggi (5,61 tweet/pengguna), bertepatan dengan sidang ICJ.
+    </p>
+    <div id="cohortBars"></div>
+  </div>
+</section>
+
+<!-- PEMBINGKAIAN -->
+<section id="pembingkaian">
+  <div class="section-inner">
+    <div class="section-eyebrow">Dimensi 3</div>
+    <h2 class="section-title">Proses Pembingkaian <span style="font-style:italic;font-size:0.7em;color:var(--ink-3)">(Framing Processes)</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      Klasifikasi <em>framing</em> dilakukan dengan pendekatan berbasis aturan (<em>rule-based</em>)
+      mengikuti tiga tugas pembingkaian inti Snow dkk. (1986):
+      <em>diagnostic</em>, <em>prognostic</em>, dan <em>motivational framing</em>.
+      Satu tweet dapat memperoleh lebih dari satu label.
+    </p>
+
+    <div class="framing-grid">
+      <div>
+        <h3 style="font-size:0.9rem;font-weight:500;color:var(--ink-2);margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:0.06em">Distribusi Kategori</h3>
+        <div class="framing-bar-list" id="framingBars"></div>
+      </div>
+      <div class="chart-wrap" style="margin:0">
+        <div class="chart-title">Distribusi Framing (Donut)</div>
+        <div class="chart-container" style="height:230px">
+          <canvas id="framingChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1.5rem">
+      <div style="background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem">
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);font-weight:500;margin-bottom:0.5rem">Diagnostic Framing</div>
+        <p style="font-size:0.85rem;color:var(--ink-2);line-height:1.65">Mengidentifikasi masalah dan mengatribusikan kesalahan kepada aktor tertentu. Pola dominan: konstruksi Israel sebagai pelanggar kemanusiaan, "zionis pesek" sebagai musuh internal.</p>
+        <div style="margin-top:0.75rem;font-size:0.8rem;color:var(--ink-3)">Rata-rata engagement: <strong style="color:var(--ink)">886,45</strong></div>
+      </div>
+      <div style="background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem">
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);font-weight:500;margin-bottom:0.5rem">Prognostic Framing</div>
+        <p style="font-size:0.85rem;color:var(--ink-2);line-height:1.65">Menawarkan solusi, strategi, dan bentuk tindakan. Meski proporsinya paling kecil, memiliki rata-rata engagement tertinggi. Terpusat pada akun komando @erlanishere.</p>
+        <div style="margin-top:0.75rem;font-size:0.8rem;color:var(--ink-3)">Rata-rata engagement: <strong style="color:var(--ink)">1.562,8</strong></div>
+      </div>
+      <div style="background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem">
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:#9b59b6;font-weight:500;margin-bottom:0.5rem">Motivational Framing</div>
+        <p style="font-size:0.85rem;color:var(--ink-2);line-height:1.65">Memberikan legitimasi moral dan dorongan partisipasi. Menggabungkan diksi keagamaan dan nasionalisme historis sebagai kosakata motif yang mempertahankan kontinuitas gerakan.</p>
+        <div style="margin-top:0.75rem;font-size:0.8rem;color:var(--ink-3)">Rata-rata engagement: <strong style="color:var(--ink)">143,56</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TWEET REPRESENTATIF -->
+<section id="tweet">
+  <div class="section-inner">
+    <div class="section-eyebrow">Bukti Empiris</div>
+    <h2 class="section-title">Tweet Representatif Terpilih</h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      Kumpulan tweet berengagement tertinggi yang dikutip dalam tesis, diorganisasi
+      berdasarkan dimensi analisis. Gunakan filter untuk menelusuri per kategori.
+    </p>
+
+    <div class="tweet-filter-row">
+      <button class="filter-btn active" data-filter="all">Semua</button>
+      <button class="filter-btn" data-filter="strukturpeluang">Struktur Peluang</button>
+      <button class="filter-btn" data-filter="mobilisasi">Mobilisasi</button>
+      <button class="filter-btn" data-filter="pembingkaian-diagnostik">Diagnostik</button>
+      <button class="filter-btn" data-filter="pembingkaian-prognostik">Prognostik</button>
+      <button class="filter-btn" data-filter="pembingkaian-motivasional">Motivasional</button>
+    </div>
+
+    <div class="tweet-grid" id="tweetGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <p>Lampiran Online · Tesis "Melampaui <em>Clicktivism</em>" · Mochamad Nurul Anwar · Universitas Paramadina · 2026</p>
+  <p style="margin-top:0.4rem">Data tweet dikumpulkan untuk kepentingan penelitian akademis. Kutipan tweet merupakan data publik yang telah dipublikasikan dalam tesis.</p>
+</footer>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────
+const D = {
+  dates: ["2023-11-01","2023-11-02","2023-11-03","2023-11-04","2023-11-05","2023-11-06","2023-11-07","2023-11-08","2023-11-09","2023-11-10","2023-11-11","2023-11-12","2023-11-13","2023-11-14","2023-11-15","2023-11-16","2023-11-17","2023-11-18","2023-11-19","2023-11-20","2023-11-21","2023-11-22","2023-11-23","2023-11-24","2023-11-25","2023-11-26","2023-11-27","2023-11-28","2023-11-29","2023-11-30","2023-12-01","2023-12-02","2023-12-03","2023-12-04","2023-12-05","2023-12-06","2023-12-07","2023-12-08","2023-12-09","2023-12-10","2023-12-11","2023-12-12","2023-12-13","2023-12-14","2023-12-15","2023-12-16","2023-12-17","2023-12-18","2023-12-19","2023-12-20","2023-12-21","2023-12-22","2023-12-23","2023-12-24","2023-12-25","2023-12-26","2023-12-27","2023-12-28","2023-12-29","2023-12-30","2023-12-31","2024-01-01","2024-01-02","2024-01-03","2024-01-04","2024-01-05","2024-01-06","2024-01-07","2024-01-08","2024-01-09","2024-01-10","2024-01-11","2024-01-12","2024-01-13","2024-01-14","2024-01-15","2024-01-16","2024-01-17","2024-01-18","2024-01-19","2024-01-20","2024-01-21","2024-01-22","2024-01-23","2024-01-24","2024-01-25","2024-01-26","2024-01-27","2024-01-28","2024-01-29","2024-01-30","2024-01-31","2024-02-01","2024-02-02","2024-02-03","2024-02-04","2024-02-05","2024-02-06","2024-02-07","2024-02-08","2024-02-09","2024-02-10","2024-02-11","2024-02-12","2024-02-13","2024-02-14","2024-02-15","2024-02-16","2024-02-17","2024-02-18","2024-02-19","2024-02-20","2024-02-21","2024-02-22","2024-02-23","2024-02-24","2024-02-25","2024-02-26","2024-02-27","2024-02-28"],
+  counts: [2,1,2,3,1,1,3,4,3,7,5,4,1,8,1,3,1,11,129,151,142,67,58,79,35,30,3,37,25,6,20,39,38,20,24,11,12,20,16,27,13,23,9,22,0,21,33,40,13,8,16,8,8,8,11,15,13,5,11,14,3,6,3,13,7,6,3,7,6,5,5,6,3,3,3,4,4,7,8,4,3,5,4,1,4,4,7,1,3,1,9,5,20,55,38,41,15,18,31,17,22,30,22,81,46,25,11,32,16,67,73,27,13,19,19,28,22,15,29,17],
+  zscores: [-0.678,-0.716,-0.678,-0.639,-0.716,-0.716,-0.639,-0.6,-0.639,-0.484,-0.562,-0.6,-0.716,-0.446,-0.716,-0.639,-0.716,-0.33,4.232,5.083,4.735,1.835,1.487,2.299,0.598,0.405,-0.639,0.676,0.212,-0.523,0.018,0.753,0.714,0.018,0.173,-0.33,-0.291,0.018,-0.136,0.289,-0.252,0.134,-0.407,0.096,-0.755,0.057,0.521,0.792,-0.252,-0.446,-0.136,-0.446,-0.446,-0.446,-0.33,-0.175,-0.252,-0.562,-0.33,-0.214,-0.639,-0.523,-0.639,-0.252,-0.484,-0.523,-0.639,-0.484,-0.523,-0.562,-0.562,-0.523,-0.639,-0.639,-0.639,-0.6,-0.6,-0.484,-0.446,-0.6,-0.639,-0.562,-0.6,-0.716,-0.6,-0.6,-0.484,-0.716,-0.639,-0.716,-0.407,-0.562,0.018,1.371,0.714,0.83,-0.175,-0.059,0.444,-0.098,0.096,0.405,0.096,2.377,1.024,0.212,-0.33,0.482,-0.136,1.835,2.067,0.289,-0.252,-0.02,-0.02,0.328,0.096,-0.175,0.366,-0.098],
+  rolling: [2.0,1.8,1.67,1.86,2.14,2.43,3.14,3.43,3.86,3.86,4.57,4.14,4.14,3.29,4.14,22.0,43.43,62.57,72.0,79.86,91.0,94.43,80.29,59.14,44.14,38.14,30.71,22.29,22.86,24.0,26.43,24.57,22.57,23.43,23.43,20.14,18.57,17.57,17.43,17.14,18.57,15.71,16.43,17.29,21.14,19.71,19.57,18.71,19.86,18.0,14.43,10.29,10.57,11.29,9.71,10.14,11.0,10.29,9.57,7.86,7.86,8.14,7.43,5.86,6.43,6.43,6.71,5.57,5.43,5.0,5.0,4.43,4.14,4.0,4.29,4.57,4.71,4.71,5.0,5.0,4.57,4.14,3.57,4.0,3.71,3.43,3.0,4.14,4.29,6.57,13.43,18.71,24.14,26.14,27.43,31.14,30.71,26.0,24.86,22.14,31.57,35.57,34.71,33.86,35.29,33.29,39.71,38.57,35.86,34.14,35.29,33.43,35.14,28.71,20.43,20.71,21.29,21.67,22.2,20.75],
+  mean: 19.52, std: 25.87
+};
+
+const PEAKS = new Set([18,19,20,23,103,110]); // index dalam array
+
+// ── CHART 1: TREND ─────────────────────────────────────────────────
+const shortLabels = D.dates.map((d,i) => {
+  const dt = new Date(d);
+  if (i === 0 || dt.getDate() === 1) return d.slice(5);
+  return '';
+});
+const barColors = D.counts.map((v,i) =>
+  PEAKS.has(i) ? 'rgba(201,67,10,0.75)' : 'rgba(24,95,165,0.25)'
+);
+
+new Chart(document.getElementById('trendChart'), {
+  type: 'bar',
+  data: {
+    labels: shortLabels,
+    datasets: [
+      { type: 'bar', data: D.counts, backgroundColor: barColors, borderColor: D.counts.map((_,i) => PEAKS.has(i) ? '#c9430a' : '#185fa5'), borderWidth: 0.5, borderRadius: 2 },
+      { type: 'line', data: D.rolling, borderColor: '#ba7517', borderWidth: 2, pointRadius: 0, tension: 0.3, fill: false }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: {
+      title: items => D.dates[D.dates.map((_,i)=>i).find(i => shortLabels[i] === items[0].label) ?? items[0].dataIndex] || items[0].label
+    }}},
+    scales: {
+      x: { ticks: { autoSkip: false, maxRotation: 0, font: { size: 9 }, color: '#888580' }, grid: { display: false } },
+      y: { ticks: { font: { size: 9 }, color: '#888580' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+    }
+  }
+});
+
+// ── CHART 2: ZSCORE ────────────────────────────────────────────────
+new Chart(document.getElementById('zscoreChart'), {
+  type: 'bar',
+  data: {
+    labels: shortLabels,
+    datasets: [
+      { data: D.zscores.map(z => z >= 0 ? z : 0), backgroundColor: D.zscores.map((_,i) => PEAKS.has(i) ? 'rgba(201,67,10,0.7)' : 'rgba(15,110,86,0.35)'), borderWidth: 0, borderRadius: 1 },
+      { data: D.zscores.map(z => z < 0 ? z : 0), backgroundColor: 'rgba(136,133,128,0.25)', borderWidth: 0, borderRadius: 1 },
+      { type: 'line', data: D.dates.map(() => 2.0), borderColor: '#c9430a', borderWidth: 1.5, borderDash: [5,3], pointRadius: 0 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { stacked: true, ticks: { autoSkip: false, maxRotation: 0, font: { size: 9 }, color: '#888580' }, grid: { display: false } },
+      y: { stacked: false, ticks: { font: { size: 9 }, color: '#888580', callback: v => v.toFixed(1) }, grid: { color: 'rgba(0,0,0,0.05)' } }
+    }
+  }
+});
+
+// ── CHART 3: TIER ─────────────────────────────────────────────────
+new Chart(document.getElementById('tierChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Tier 1\n(Vigilante)', 'Tier 2\n(Semi-aktif)', 'Tier 3\n(Pasukan)', 'Tier 4\n(Amplifier)', 'Tier 5\n(Crowd)', 'Tier 6\n(Massa)'],
+    datasets: [{
+      data: [10.8, 9.9, 2.6, 1.58, 24.63, 50.49],
+      backgroundColor: ['#c9430a','#ba7517','#0f6e56','#185fa5','#888580','#c4bfb8'],
+      borderRadius: 4, borderWidth: 0
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw}% dari total tweet` } } },
+    scales: {
+      x: { ticks: { font: { size: 9 }, callback: v => v + '%' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+      y: { ticks: { font: { size: 9 } }, grid: { display: false } }
+    }
+  }
+});
+
+// ── CHART 4: FRAMING ──────────────────────────────────────────────
+const framingData = [
+  { label: 'Diagnostic', pct: 43.28, color: '#ba7517' },
+  { label: 'Motivational', pct: 39.95, color: '#9b59b6' },
+  { label: 'Unclassified', pct: 9.43, color: '#c4bfb8' },
+  { label: 'Prognostic', pct: 4.61, color: '#185fa5' },
+  { label: 'Diag. + Progn.', pct: 1.58, color: '#e8693a' },
+  { label: 'Diag. + Motiv.', pct: 0.94, color: '#0f6e56' },
+  { label: 'Lainnya', pct: 0.22, color: '#e5e0d8' }
+];
+new Chart(document.getElementById('framingChart'), {
+  type: 'doughnut',
+  data: {
+    labels: framingData.map(d => d.label),
+    datasets: [{ data: framingData.map(d => d.pct), backgroundColor: framingData.map(d => d.color), borderWidth: 2, borderColor: '#faf9f7' }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'right', labels: { font: { size: 10 }, padding: 8, boxWidth: 10 } }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw}%` } } },
+    cutout: '60%'
+  }
+});
+
+// ── FRAMING BARS ─────────────────────────────────────────────────
+const fbContainer = document.getElementById('framingBars');
+framingData.slice(0,4).forEach(d => {
+  fbContainer.innerHTML += `
+  <div class="framing-bar-item">
+    <div class="framing-bar-header">
+      <span class="framing-bar-name">${d.label}</span>
+      <span class="framing-bar-pct">${d.pct}%</span>
+    </div>
+    <div class="framing-bar-track">
+      <div class="framing-bar-fill" style="width:${d.pct}%;background:${d.color}"></div>
+    </div>
+  </div>`;
+});
+
+// ── COHORT BARS ───────────────────────────────────────────────────
+const cohorts = [
+  { label: 'Nov 2023', users: 677, tweets: 914, pct: 39.01, avg: 1.35, color: '#c9430a' },
+  { label: 'Des 2023', users: 359, tweets: 694, pct: 29.62, avg: 1.93, color: '#ba7517' },
+  { label: 'Jan 2024', users: 51,  tweets: 286, pct: 12.21, avg: 5.61, color: '#0f6e56' },
+  { label: 'Feb 2024', users: 323, tweets: 449, pct: 19.16, avg: 1.39, color: '#185fa5' }
+];
+const cb = document.getElementById('cohortBars');
+cohorts.forEach(c => {
+  cb.innerHTML += `
+  <div class="cohort-bar-row">
+    <div class="cohort-label">${c.label}</div>
+    <div class="cohort-track">
+      <div class="cohort-fill" style="width:${c.pct}%;background:${c.color}">${c.pct}%</div>
+    </div>
+    <div class="cohort-val">${c.users} user · ø ${c.avg} tweet/user</div>
+  </div>`;
+});
+
+// ── TWEET DATA ────────────────────────────────────────────────────
+const tweets = [
+  { date:'18 Nov 2023', dim:'strukturpeluang', framing:['diagnostik','motivasional'], rt:13111, like:28026, eng:42551, text:'Surat kabar Israel "Haaretz" mengungkapkan ratusan tentara Zionis Israel kini mengalami gangguan psikologis (23/10). Saatnya netizen Indonesia menunjukkan kekuatan julidnya. Kita \'bantu\' mereka untuk semakin putus asa dengan nge-trol di akun IG mereka. Julid fi sabilillah!', note:'Pemicu naratif Gelombang I; laporan Haaretz sebagai bukti simbolik efektivitas digital' },
+  { date:'19 Nov 2023', dim:'strukturpeluang', framing:['motivasional'], rt:446, like:3183, eng:3764, text:'Ini waktunya kalian netizen Indo untuk "julid fi sabilillah"', note:'Artikulasi awal simbol kolektif oleh Erlangga Greschinov' },
+  { date:'20 Nov 2023', dim:'strukturpeluang', framing:['motivasional'], rt:4024, like:12224, eng:17819, text:'Berikut disampaikan SK Pengangkatan saudara @Greschinov sebagai Komandan Satuan Operasi Khusus Netizen Julid Anti Israel. Sandi Operasi: Julid Fi Sabilillah. Untuk dipergunakan sebagaimana mestinya. KOMANDO!', note:'Institusionalisasi ringan gerakan; pembentukan arsitektur simbolik kepemimpinan' },
+  { date:'21 Nov 2023', dim:'strukturpeluang', framing:['prognostik','motivasional'], rt:547, like:1500, eng:2253, text:'Guys ayo kita bikin Julid Fi Sabilillah menjadi trending topic dunia biar para tentara zionis Israel dan sekutunya pas bangun tidur nanti mereka pada over thinking. Gaskan ya', note:'Eskalasi ambisi gerakan menuju agenda visibilitas global' },
+  { date:'12 Feb 2024', dim:'strukturpeluang', framing:['diagnostik'], rt:4857, like:4980, eng:10068, text:'BREAKING NEWS. Saat ini Israel sedang menggempur Rafah, tempat terakhir para pengungsi Palestina. Pagi ini ada puluhan orang dibunuh Zionis dan puluhan lainnya terluka. Ini adalah pelanggaran hukum internasional dan Israel harus dihukum berat! #ICJ_Breach', note:'Pemicu Gelombang II; kekerasan terdigitalisasi dikonversi jadi peluang mobilisasi' },
+  { date:'14 Feb 2024', dim:'strukturpeluang', framing:['diagnostik','prognostik'], rt:6565, like:16953, eng:24045, text:'Semoga presiden kita berikutnya tidak pernah berencana normalisasi hubungan dengan Israel, lebih sensitif dengan isu Palestina, tegas dengan korupsi, dan mau mendengarkan kritik/saran rakyatnya. Sudah itu saja.', note:'Interseksi isu Palestina dengan kontestasi elektoral Pemilu 2024' },
+  { date:'20 Feb 2024', dim:'strukturpeluang', framing:['diagnostik','prognostik'], rt:6039, like:12376, eng:19621, text:'Kok bisa di Indonesia ada pelatihan kerjasama pertanian ama Israel? Udah ndak betul ini', note:'Perluasan framing ke kritik kebijakan luar negeri domestik' },
+  { date:'21 Nov 2023', dim:'mobilisasi', framing:['prognostik'], rt:279, like:2646, eng:3015, text:'Ingat sandi operasi Julid Fi Sabilillah, laksanakan misi dengan baik dan penuh keikhlasan. KOMANDO!', note:'Perangkat framing militer-keagamaan sebagai pengikat identitas kolektif' },
+  { date:'Okt 2023', dim:'mobilisasi', framing:['prognostik'], rt:0, like:0, eng:0, text:'PENGUMUMAN TEKNIS OPERASI #JULIDFISABILILLAH Brigade Hassan bin Tsabit: Target utama kita adalah para tentara dan aparat kepolisian Israel. Tindakan: memberikan counter-narratives secara persuasif dan trolling. Tidak membawa narasi antisemit.', note:'Maklumat teknis operasi — kode etik dan panduan taktis gerakan' },
+  { date:'20 Jan 2024', dim:'mobilisasi', framing:['motivasional'], rt:0, like:20725, eng:20725, text:'Rakyatnya Julid fi Sabilillah. Kemenlunya mau nuntut Israel ke Mahkamah Internasional atas pendudukan ilegal. INDONESIA MEMANG LUAR BIASA, BANGGA!!', note:'Efikasi kolektif: keberpihakan negara sebagai konfirmasi perjuangan digital' },
+  { date:'20 Nov 2023', dim:'pembingkaian-diagnostik', framing:['diagnostik'], rt:0, like:0, eng:0, text:'BREAKING NEWS. Gaza dalam kondisi darurat. Semenjak didakwa oleh ICJ sebagai pelaku genosida, Israel melakukan manuver kotor, yaitu menuduh pekerja UNRWA sebagai anggota Hamas. Alhasil saat ini banyak negara Barat yang menyetop pendanaan kepada UNRWA.', note:'Konstruksi Israel sebagai aktor manipulasi narasi; pembingkaian ketidakadilan berlapis' },
+  { date:'Des 2023', dim:'pembingkaian-diagnostik', framing:['diagnostik'], rt:0, like:0, eng:0, text:'Tipikal Zionis pesek Indo: 1. Anon. 2. Islamofob. 3. Bigot Kristen, padahal banyak orang Kristen Palestina yg ikut berjuang. 4. Capres pilihannya dah ketebak. Modelan begini ada di sekitar kita, mereka cuma ga berani nunjukin hidung mereka langsung.', note:'Konstruksi "zionis pesek" sebagai penanda identitas musuh internal' },
+  { date:'Jan 2024', dim:'pembingkaian-prognostik', framing:['prognostik'], rt:0, like:0, eng:31328, text:'PENGUMUMAN: Tanggal 11 dan 12 kita akan melakukan serangan umum. Serangan kali ini bentuknya berbeda, yaitu dengan cara membeberkan sebanyak-banyaknya kejahatan Zionis karena pada tanggal tsb akan dimulai perkara terhadap Israel di Mahkamah Internasional. RAPATKAN BARISAN!', note:'Koordinasi aksi diselaraskan dengan momentum sidang ICJ — engagement 31.328' },
+  { date:'Feb 2024', dim:'pembingkaian-prognostik', framing:['prognostik'], rt:0, like:0, eng:13993, text:'Kalo ada list caleg lain yang kedapatan pro-Israel/netral dalam isu Palestina, kabari aku ya. Biar kita publish rame-rame dan jangan sampai kita pilih dia', note:'Electoral punishment sebagai bentuk aksi prognostik berbasis kontestasi Pemilu' },
+  { date:'Nov 2023', dim:'pembingkaian-motivasional', framing:['motivasional'], rt:0, like:12475, eng:12475, text:'Jangan lelah bersuara setiap harinya soal Palestina! Sekali sehari itu lebih baik daripada tidak sama sekali. #Julidfisabilillah bukan sekadar tren yang dapat ditinggal ketika sudah bosan, tetapi pandangan hidup mengenai perjuangan hingga kemerdekaan Palestina tercapai!', note:'Membangun kewajiban moral jangka panjang; mengatasi kelelahan partisipan' },
+  { date:'Des 2023', dim:'pembingkaian-motivasional', framing:['motivasional'], rt:0, like:0, eng:5208, text:'Beruntung #julidfisabilillah terdiri dari berbagai macam laskar & badan perjuangan. Ada INF (Indonesia Netizen Force), Brigade Hassan bin Tsabit, IJF, TNI (Tentara Netizen Indonesia)... Persis saat kita berjuang melawan Belanda dulu. Teruskan!', note:'Paralel historis perjuangan kemerdekaan sebagai kosakata motif nasionalisme' }
+];
+
+const fLabels = { 'diagnostik': { text: 'Diagnostik', cls: 'badge-warm' }, 'prognostik': { text: 'Prognostik', cls: 'badge-blue' }, 'motivasional': { text: 'Motivasional', cls: '' } };
+const dimLabels = { 'strukturpeluang': 'Str. Peluang', 'mobilisasi': 'Mobilisasi', 'pembingkaian-diagnostik': 'Pembingkaian · Diagnostik', 'pembingkaian-prognostik': 'Pembingkaian · Prognostik', 'pembingkaian-motivasional': 'Pembingkaian · Motivasional' };
+
+function renderTweets(filter) {
+  const grid = document.getElementById('tweetGrid');
+  grid.innerHTML = '';
+  const visible = filter === 'all' ? tweets : tweets.filter(t => t.dim === filter);
+  visible.forEach(t => {
+    const fbadges = t.framing.map(f => {
+      const lb = fLabels[f] || { text: f, cls: '' };
+      return `<span class="badge ${lb.cls}" style="${!lb.cls ? 'background:rgba(155,89,182,0.1);color:#9b59b6' : ''}">${lb.text}</span>`;
+    }).join('');
+    const dimBadge = `<span class="badge badge-teal">${dimLabels[t.dim] || t.dim}</span>`;
+    const engStr = t.eng > 0 ? `<span>Engagement <strong>${t.eng.toLocaleString('id')}</strong></span><span>RT <strong>${t.rt.toLocaleString('id')}</strong></span><span>Like <strong>${t.like.toLocaleString('id')}</strong></span>` : '';
+    grid.innerHTML += `
+    <div class="tweet-card dim-${t.dim}">
+      <div class="tweet-card-header">
+        <span class="tweet-date">${t.date}</span>
+        <div class="tweet-badges">${dimBadge}${fbadges}</div>
+      </div>
+      <div class="tweet-text">${t.text}</div>
+      ${t.eng > 0 ? `<div class="tweet-meta">${engStr}</div>` : ''}
+      <div style="margin-top:0.6rem;font-size:0.78rem;color:var(--ink-3);font-style:italic">${t.note}</div>
+    </div>`;
+  });
+}
+renderTweets('all');
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTweets(btn.dataset.filter);
+  });
+});
+</script>
+</body>
+</html>
